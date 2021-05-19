@@ -33,3 +33,5 @@
 
 ## Is it the same workflow with the Login Component?
 Yes. We just copy pasted the Register code to the Login and adapted it to the needs for the Login page.
+
+## Alert Context, State & Component... same workflow?
