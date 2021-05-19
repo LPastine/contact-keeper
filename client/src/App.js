@@ -4,6 +4,10 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 
+// 8(b) - Import the Register component to the Appjs
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+
 import ContactState from './context/contact/ContactState';
 
 // 10 - Bring the AuthState to the Appjs
@@ -23,6 +27,9 @@ const App = () => {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/about' component={About} />
+                {/* 9(b) - Create Route for the Register Component */}
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
               </Switch>
             </div>
           </Fragment>
