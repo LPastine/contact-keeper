@@ -1,7 +1,27 @@
 // 2 - Setup the Register Form
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
-export const Login = () => {
+import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
+
+export const Login = (props) => {
+    const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
+    const { setAlert } = alertContext;
+    const { login, error, clearErrors, isAuthenticated } = authContext;
+
+    useEffect(() => {
+        if(isAuthenticated) {
+            props.history.push('/');
+        }
+        if(error === 'Invalid Credentials') {
+            setAlert(error, 'danger');
+            clearErrors();
+        }
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history]);
+
     // 3 - Declare the user state variable 
     const [user, setUser] = useState({
         email: '',
@@ -17,7 +37,14 @@ export const Login = () => {
     // 7 - Create onSubmit function and add it to the form 
     const onSubmit = e => {
         e.preventDefault();
-        console.log('Login submit');
+        if(email === '' || password === '') {
+            setAlert('Please fill in all fields', 'danger');
+        } else {
+            login({
+                email,
+                password
+            });
+        }
     }
 
     return (
@@ -29,11 +56,11 @@ export const Login = () => {
             <form onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
-                    <input type="email" name="email" value={email} onChange={onChange}/>
+                    <input type="email" name="email" value={email} onChange={onChange} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" value={password} onChange={onChange}/>
+                    <input type="password" name="password" value={password} onChange={onChange} required/>
                 </div>
                 <input type="submit" value="Login" className="btn btn-primary btn-block"/>
             </form>
