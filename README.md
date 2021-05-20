@@ -18,6 +18,11 @@
 - 10 - Bring the AuthState to the Appjs
 - 11 - Wrap the AuthState as the very first provider
 
+### Reducer Notes - still pending in authReducer - see alertReducer
+- 1 - Import the types related to this context
+- 2 - Specify how we want to treat what we receive in each state
+
+
 ## Creating and implementing a Component workflow example - auth
 
 - 0 - Create the folder "auth" inside the components folder
@@ -34,4 +39,10 @@
 ## Is it the same workflow with the Login Component?
 Yes. We just copy pasted the Register code to the Login and adapted it to the needs for the Login page.
 
-## Alert Context, State & Component... same workflow?
+## Alert Context, State, Reducer & Component... same workflow?
+Yes. But there are some differences within the Component workflow, see these steps.
+
+- 1 - Bring in the AlertContext
+- 2 - Initialize the context
+- 3 - Bring in the useContext hook
+- 4 - Treat the output that's going to be sent for the App.js
