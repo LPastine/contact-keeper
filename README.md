@@ -46,3 +46,11 @@ Yes. But there are some differences within the Component workflow, see these ste
 - 2 - Initialize the context
 - 3 - Bring in the useContext hook
 - 4 - Treat the output that's going to be sent for the App.js
+
+## Notes about the useEffect Hook
+The useEffect Hook tells React that your component needs to do something after render. React will remember the function you passed - or effect - and call it later after performing the DOM updates.
+
+Example => Register.js for error handling with alerts
+
+Note: we can add dependencies so that we make sure something happens before the function or effect runs, for example in Register.js we make sure the error is displayed before running the effect.
+
