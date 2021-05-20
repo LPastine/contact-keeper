@@ -1,8 +1,9 @@
 // 2 - Import React, the useReducer hook,  the context and the reducer.
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
+import setAuthToken from '../../utils/setAuthToken';
 // 3 - Import the types
 import {
     REGISTER_SUCCESS,
@@ -32,7 +33,23 @@ const AuthState = props => {
     // 7 - Create the actions (methods) - At first we comment them, them we write the code.
 
     // Load User
-    const loadUser = () => console.log('loaduser');
+    const loadUser = useCallback(async () => {
+        setAuthToken(localStorage.token);
+
+        try {
+            const res = await axios.get('/api/auth');
+
+            dispatch({
+                type: USER_LOADED, 
+                payload: res.data 
+            });
+
+        } catch (err) {
+            dispatch({
+                type: AUTH_ERROR,
+            })
+        }
+    }, []);
 
     // Register User
     const register = async formData => {
@@ -49,6 +66,8 @@ const AuthState = props => {
                 type: REGISTER_SUCCESS,
                 payload: res.data
             });
+
+            loadUser();
         } catch (err) {
             dispatch({
                 type: REGISTER_FAIL,
