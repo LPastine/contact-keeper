@@ -34,7 +34,7 @@ export const ContactItem = ({ contact }) => {
 }
 
 ContactItem.propTypes = {
-    contacts: PropTypes.object.isRequired,
+    contact: PropTypes.object.isRequired,
 }
 
 export default ContactItem;
